@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ConfirmPage extends StatefulWidget {
+  final String cut;
+  ConfirmPage({Key key, @required this.cut}) : super(key: key);
   @override
   _ConfirmPageState createState() => _ConfirmPageState();
 }
@@ -12,6 +14,13 @@ class _ConfirmPageState extends State<ConfirmPage> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          leading: Container(
+            padding: EdgeInsets.only(top: size.height / 18),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
           toolbarHeight: 80,
           elevation: 0.0,
           backgroundColor: Colors.transparent,
@@ -58,7 +67,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
                   borderRadius: BorderRadius.circular(7.0),
                   border: Border.all(color: Colors.green, width: 2),
                   image: DecorationImage(
-                    image: AssetImage('assets/style2.jpg'),
+                    image: AssetImage(this.widget.cut),
                     fit: BoxFit.fill,
                   ),
                   boxShadow: [

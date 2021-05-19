@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:thebarber/confirm.dart';
 
 class BookingPage extends StatefulWidget {
+  final String cut;
+  final String time;
+  final String date;
+  BookingPage(
+      {Key key, @required this.cut, @required this.time, @required this.date})
+      : super(key: key);
   @override
   _BookingPageState createState() => _BookingPageState();
 }
@@ -14,6 +20,14 @@ class _BookingPageState extends State<BookingPage> {
       backgroundColor: Color.fromRGBO(38, 38, 39, 1),
       appBar: AppBar(
         toolbarHeight: 80,
+        leading: Container(
+          padding: EdgeInsets.only(top: size.height / 18),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        automaticallyImplyLeading: false,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         title: Container(
@@ -88,7 +102,7 @@ class _BookingPageState extends State<BookingPage> {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: size.height / 80),
                   child: Text(
-                    'Oct 18, 12:30 AM',
+                    'Oct ' + this.widget.date + ', ' + this.widget.time + ' AM',
                     style: TextStyle(
                         fontFamily: 'Oswald',
                         color: Colors.white,
@@ -153,7 +167,7 @@ class _BookingPageState extends State<BookingPage> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  ConfirmPage()));
+                                  ConfirmPage(cut: this.widget.cut)));
                     },
                     child: Container(
                         height: 70.0,

@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var selectedDate = 18;
   var selectedBarber = 'Jonathan';
+  var selectedBarberPhoto = 'assets/style1.jpg';
   var selectedTime = '12:30';
 
   @override
@@ -122,7 +123,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => BookingPage()));
+                        builder: (BuildContext context) => BookingPage(
+                            time: this.selectedTime,
+                            date: this.selectedDate.toString(),
+                            cut: this.selectedBarberPhoto)));
               },
               child: Container(
                   height: 70.0,
@@ -233,6 +237,7 @@ class _HomePageState extends State<HomePage> {
             ),
             InkWell(
               onTap: () {
+                this.selectedBarberPhoto = imgPath;
                 selectBarber(name);
               },
               child: Container(
