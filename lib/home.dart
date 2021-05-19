@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thebarber/booking.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,24 +15,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
         elevation: 0.0,
         backgroundColor: Colors.white,
-        title: Text('BOOKING',
-            style: TextStyle(
-                 fontSize: 16.0, color: Colors.black)),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black,
+        title: Container(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height / 16),
+          child: Text('BOOKING',
+              style: TextStyle(
+                  fontFamily: 'Oswald', fontSize: 16.0, color: Colors.black)),
         ),
+        centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
-                height: 100.0,
+                height: 120.0,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
                       blurRadius: 3.0,
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 ], color: Colors.white),
               ),
               Positioned(
-                top: 20.0,
+                top: 30.0,
                 left: 15.0,
                 right: 15.0,
                 child: Container(
@@ -48,30 +49,30 @@ class _HomePageState extends State<HomePage> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
+                      SizedBox(width: 20.0),
                       getDate(18, 'Tue'),
-                      SizedBox(width: 25.0),
+                      SizedBox(width: 30.0),
                       getDate(19, 'Wed'),
-                      SizedBox(width: 25.0),
+                      SizedBox(width: 30.0),
                       getDate(20, 'Thu'),
-                      SizedBox(width: 25.0),
+                      SizedBox(width: 30.0),
                       getDate(21, 'Fri'),
-                      SizedBox(width: 25.0),
                     ],
                   ),
                 ),
               )
             ],
           ),
-          SizedBox(height: 35.0),
+          SizedBox(height: 20.0),
           Center(
             child: Text(
               'Hagorapt',
               style: TextStyle(
+                  fontFamily: 'Oswald',
                   letterSpacing: 2.0,
-                  
                   fontSize: 30.0,
-                  color: Colors.black.withOpacity(0.6),
-                  fontWeight: FontWeight.bold),
+                  color: Colors.black.withOpacity(01),
+                  fontWeight: FontWeight.w900),
             ),
           ),
           SizedBox(height: 15.0),
@@ -82,61 +83,84 @@ class _HomePageState extends State<HomePage> {
               getService('Crew Cut', 15)
             ],
           ),
-          SizedBox(height: 15.0),
+          SizedBox(height: MediaQuery.of(context).size.height / 20),
           Container(
-              height: 175.0,
+              height: 200.0,
               child: ListView(
                 padding: EdgeInsets.only(left: 15.0, right: 15.0),
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
                   getBarber('assets/style2.jpg', 'Anton'),
-                  SizedBox(width: 15.0),
+                  SizedBox(width: 25.0),
                   getBarber('assets/style1.jpg', 'Jonathan'),
-                  SizedBox(width: 15.0),
+                  SizedBox(width: 25.0),
                   getBarber('assets/style3.jpeg', 'Jim'),
-                  SizedBox(width: 15.0),
                 ],
               )),
-          SizedBox(height: 20.0),
+          SizedBox(height: MediaQuery.of(context).size.height / 15),
           Container(
             height: 50.0,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                getTime('11.00'),
+                getTime('11:00'),
                 SizedBox(width: 25.0),
-                getTime('12.30'),
+                getTime('12:30'),
                 SizedBox(width: 25.0),
-                getTime('13.30'),
+                getTime('13:30'),
                 SizedBox(width: 25.0),
-                getTime('15.00'),
+                getTime('15:00'),
                 SizedBox(width: 25.0)
               ],
             ),
           ),
-          SizedBox(height: 25.0),
+          SizedBox(height: MediaQuery.of(context).size.height / 14),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+            padding: const EdgeInsets.all(10),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => BookingPage()));
+              },
               child: Container(
-                height: 50.0,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0),
-                    color: Colors.black),
-                child: Center(
-                  child: Text(
-                    'BOOK',
-                    style: TextStyle(
-                        letterSpacing: 2.0,
-                        
-                        fontSize: 17.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+                  height: 70.0,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.0),
+                      color: Colors.black),
+                  child: Row(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width / 2.5),
+                          child: Text(
+                            'BOOK',
+                            style: TextStyle(
+                                letterSpacing: 3,
+                                fontFamily: 'Oswald',
+                                fontSize: 20.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800),
+                          )),
+                      SizedBox(width: MediaQuery.of(context).size.width / 3.8),
+                      Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(48, 48, 48, 1)),
+                          child: Text(
+                            "\$65",
+                            style: TextStyle(
+                                fontFamily: 'Oswald',
+                                letterSpacing: 2.0,
+                                fontSize: 17.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ],
+                  )),
             ),
           )
         ],
@@ -146,9 +170,9 @@ class _HomePageState extends State<HomePage> {
 
   Color switchTimeColor(time) {
     if (time == selectedTime) {
-      return Colors.black.withOpacity(0.8);
+      return Colors.black.withOpacity(1);
     } else {
-      return Colors.grey.withOpacity(0.2);
+      return Colors.grey.withOpacity(0.1);
     }
   }
 
@@ -183,7 +207,8 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             time,
             style: TextStyle(
-                
+                fontFamily: 'Oswald',
+                letterSpacing: 1,
                 fontSize: 17.0,
                 fontWeight: FontWeight.bold,
                 color: switchTimeContentColor(time)),
@@ -199,7 +224,7 @@ class _HomePageState extends State<HomePage> {
         Stack(
           children: <Widget>[
             Container(
-              height: 150.0,
+              height: 160.0,
               width: 150.0,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7.0),
@@ -211,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                 selectBarber(name);
               },
               child: Container(
-                height: 150.0,
+                height: 160.0,
                 width: 150.0,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7.0),
@@ -220,10 +245,13 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-        SizedBox(height: 7.0),
+        SizedBox(height: 10.0),
         Text(
           name,
-          style: TextStyle( fontSize: 15.0),
+          style: TextStyle(
+              fontSize: 18.0,
+              fontFamily: 'Oswald',
+              fontWeight: FontWeight.w200),
         )
       ],
     );
@@ -249,14 +277,12 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Text(
             name,
-            style: TextStyle(
-                 fontSize: 17.0, color: Colors.black),
+            style: TextStyle(fontSize: 17.0, color: Colors.black),
           ),
           SizedBox(width: 5.0),
           Text(
             '\$' + price.toString(),
-            style: TextStyle(
-                 fontSize: 17.0, color: Colors.grey),
+            style: TextStyle(fontSize: 17.0, color: Colors.grey),
           ),
           IconButton(
             icon: Icon(Icons.close),
@@ -286,7 +312,6 @@ class _HomePageState extends State<HomePage> {
               Text(
                 date.toString(),
                 style: TextStyle(
-                    
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
                     color: switchContentColor(date)),
@@ -307,7 +332,7 @@ class _HomePageState extends State<HomePage> {
 
   Color switchColor(date) {
     if (date == selectedDate) {
-      return Colors.black.withOpacity(0.8);
+      return Colors.black.withOpacity(1);
     } else {
       return Colors.grey.withOpacity(0.2);
     }
