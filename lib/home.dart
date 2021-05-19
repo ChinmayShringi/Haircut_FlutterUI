@@ -51,13 +51,13 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       SizedBox(width: 20.0),
-                      getDate(18, 'Tue'),
+                      _buildDateCircle(18, 'Tue'),
                       SizedBox(width: 30.0),
-                      getDate(19, 'Wed'),
+                      _buildDateCircle(19, 'Wed'),
                       SizedBox(width: 30.0),
-                      getDate(20, 'Thu'),
+                      _buildDateCircle(20, 'Thu'),
                       SizedBox(width: 30.0),
-                      getDate(21, 'Fri'),
+                      _buildDateCircle(21, 'Fri'),
                     ],
                   ),
                 ),
@@ -91,11 +91,11 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(left: 15.0, right: 15.0),
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  getBarber('assets/style2.jpg', 'Anton'),
+                  _buildBarberImage('assets/style2.jpg', 'Anton'),
                   SizedBox(width: 25.0),
-                  getBarber('assets/style1.jpg', 'Jonathan'),
+                  _buildBarberImage('assets/style1.jpg', 'Jonathan'),
                   SizedBox(width: 25.0),
-                  getBarber('assets/style3.jpeg', 'Jim'),
+                  _buildBarberImage('assets/style3.jpeg', 'Jim'),
                 ],
               )),
           SizedBox(height: MediaQuery.of(context).size.height / 15),
@@ -104,13 +104,13 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                getTime('11:00'),
+                _buildTimeOptions('11:00'),
                 SizedBox(width: 25.0),
-                getTime('12:30'),
+                _buildTimeOptions('12:30'),
                 SizedBox(width: 25.0),
-                getTime('13:30'),
+                _buildTimeOptions('13:30'),
                 SizedBox(width: 25.0),
-                getTime('15:00'),
+                _buildTimeOptions('15:00'),
                 SizedBox(width: 25.0)
               ],
             ),
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Color switchTimeColor(time) {
+  Color changeTimeBackgroundColor(time) {
     if (time == selectedTime) {
       return Colors.black.withOpacity(1);
     } else {
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Color switchTimeContentColor(time) {
+  Color changeTimeColor(time) {
     if (time == selectedTime) {
       return Colors.white;
     } else {
@@ -194,13 +194,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget getTime(time) {
+  Widget _buildTimeOptions(time) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 500),
       curve: Curves.easeIn,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: switchTimeColor(time)),
+          color: changeTimeBackgroundColor(time)),
       height: 50.0,
       width: 75.0,
       child: InkWell(
@@ -215,14 +215,14 @@ class _HomePageState extends State<HomePage> {
                 letterSpacing: 1,
                 fontSize: 17.0,
                 fontWeight: FontWeight.bold,
-                color: switchTimeContentColor(time)),
+                color: changeTimeColor(time)),
           ),
         ),
       ),
     );
   }
 
-  Widget getBarber(String imgPath, String name) {
+  Widget _buildBarberImage(String imgPath, String name) {
     return Column(
       children: <Widget>[
         Stack(
@@ -245,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                 width: 150.0,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7.0),
-                    color: getSelectedBarber(name)),
+                    color: changeBarberImageOverlay(name)),
               ),
             )
           ],
@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Color getSelectedBarber(name) {
+  Color changeBarberImageOverlay(name) {
     if (name == selectedBarber) {
       return Colors.green.withOpacity(0.3);
     } else {
@@ -298,17 +298,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget getDate(int date, String day) {
+  Widget _buildDateCircle(int date, String day) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 500),
       curve: Curves.easeIn,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0), color: switchColor(date)),
+          borderRadius: BorderRadius.circular(30.0),
+          color: changeDateBackgroundColor(date)),
       width: 60.0,
       height: 60.0,
       child: InkWell(
         onTap: () {
-          selectDate(date);
+          dateOnChange(date);
         },
         child: Center(
           child: Column(
@@ -319,14 +320,14 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
-                    color: switchContentColor(date)),
+                    color: changeDateColor(date)),
               ),
               Text(
                 day,
                 style: TextStyle(
                     fontFamily: 'FiraSans',
                     fontSize: 15.0,
-                    color: switchContentColor(date)),
+                    color: changeDateColor(date)),
               ),
             ],
           ),
@@ -335,7 +336,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Color switchColor(date) {
+  Color changeDateBackgroundColor(date) {
     if (date == selectedDate) {
       return Colors.black.withOpacity(1);
     } else {
@@ -343,7 +344,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Color switchContentColor(date) {
+  Color changeDateColor(date) {
     if (date == selectedDate) {
       return Colors.white;
     } else {
@@ -351,7 +352,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  selectDate(date) {
+  dateOnChange(date) {
     setState(() {
       selectedDate = date;
     });
