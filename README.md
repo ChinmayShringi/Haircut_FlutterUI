@@ -1,6 +1,10 @@
 # thebarber
 
-A new Flutter project.
+Flutter Template ready to use contains dynamic data entry.
+
+## theBarber 
+![Alt text](ss/ss.png "Home")
+<a href="https://dribbble.com/shots/4248839-Stylist-App/attachments/970947">Inspiration</a>
 
 ## Getting Started
 
